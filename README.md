@@ -15,7 +15,7 @@
 ```
 Переименуйте файл data.sample.ini в data.ini в директории data
 Добавьте валидный username и password в соответствующие поля файла data.ini
-python - m venv venv
+python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 pytest
