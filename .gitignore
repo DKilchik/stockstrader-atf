@@ -1,0 +1,10 @@
+# python
+venv/
+.pytest_cache/
+__pycache__
+
+# allure
+allure-results/
+
+# sensitive data
+data.ini
