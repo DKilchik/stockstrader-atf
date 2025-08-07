@@ -11,6 +11,10 @@
 * pytest pytest-bdd + плагин pytest-rerunfailures
 * allure
 
+### Дополнительно:
+* Настроен запуск на базе docker compose
+* Реализован дополнительный тест(негативный сценарий логина) для демонстрации функционала pytest-bdd(scenario outlines, pytest-bdd parser, tags)
+
 ### Запуск 
 ##### Зависимости:
 * python 3 и pip
@@ -25,7 +29,9 @@ mv data/data.sample.ini data/data.ini # Переименуйте файл data.s
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-pytest
+pytest # запуск 2 сценариев 
+pytest -m positive # запуск базового сценария 
+pytest -m negative # запуск дополнительного сценария 
 allure serve allure-results # Опционально для просмотра отчета 
 ```
 

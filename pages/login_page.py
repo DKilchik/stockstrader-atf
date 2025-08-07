@@ -10,6 +10,7 @@ class LoginPage(BasePage):
     PASSWORD_FIELD = (By.XPATH, "//input[@type='password']")
     CONTINUE_SHADOW_HOST = (By.CSS_SELECTOR, "div.login-action ion-button[type='button']")
     CONTINUE_BUTTON = (By.CSS_SELECTOR, "button.button-native")
+    INVALID_CREDENTIAL_LABEL = (By.XPATH, "//ion-label[text()='Invalid credentials']")
 
     def open(self):
         self._browser.get(self.URL)
@@ -22,3 +23,6 @@ class LoginPage(BasePage):
 
     def click_continue(self):
         self.element(self.CONTINUE_SHADOW_HOST).shadow_child(self.CONTINUE_BUTTON).click(js=True)
+
+    def is_invalid_creds_label_present(self) -> bool:
+        return self.element(self.INVALID_CREDENTIAL_LABEL, timeout=10, auto_search=False).is_present
