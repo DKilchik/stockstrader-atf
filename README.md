@@ -20,6 +20,19 @@ source venv/bin/activate
 pip install -r requirements.txt
 pytest
 ```
+
+### Запуск c docker compose
+```
+git clone https://github.com/DKilchik/stockstrader-atf.git
+cd stock_trader
+mv data/data.sample.ini data/data.ini # Переименуйте файл data.sample.ini в data.ini в директории data
+# Добавьте валидный username и password в соответствующие поля файла data.ini
+sed -i 's/^username = .*/username = <Вылидный юзер>/' data.ini && \
+sed -i 's/^password = .*/password = <Вылидный пароль>/' data.ini
+docker compose up --abort-on-container-exit
+docker compose run --rm tests allure open allure-report # Опционально для просмотра allure отчета
+```
+
 ### Структура проекта
 
 ```commandline

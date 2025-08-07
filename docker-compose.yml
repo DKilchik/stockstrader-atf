@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  tests:
+    build: .
+    container_name: bdd-tests
+    volumes:
+      - .:/tests
+      - allure-results:/tests/allure-results
+      - allure-report:/tests/allure-report
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: >
+      sh -c "pytest --headless --docker &&
+             allure generate allure-results -o allure-report --clean"
+    stdin_open: true
+    tty: true
+
+volumes:
+  allure-results:
+  allure-report:

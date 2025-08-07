@@ -2,6 +2,7 @@ import pytest
 import os
 import platform
 import allure
+import tempfile
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -15,6 +16,8 @@ def pytest_addoption(parser):
     """
     parser.addoption("--headless", action="store_true",
                      help="Switch on the headless mode")
+    parser.addoption("--docker", action="store_true",
+                     help="Switch on Configuration options to run in docker")
 
 @pytest.fixture(scope="session", autouse=True)
 def generate_environment():
@@ -57,6 +60,12 @@ def browser(request):
     options.add_argument("--start-maximized")
     if request.config.getoption("--headless"):
         options.add_argument("--headless=new")
+        options.add_argument("--disable-gpu")
+    if request.config.getoption("--docker"):
+        user_data_dir = tempfile.mkdtemp()
+        options.add_argument(f"--user-data-dir={user_data_dir}")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--no-sandbox")
     driver = Chrome(options=options)
     yield driver
     if request.node.rep_call.failed:
