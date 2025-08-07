@@ -12,16 +12,26 @@
 * allure
 
 ### Запуск 
+##### Зависимости:
+* python 3 и pip
+* Chrome browser
+* Chromedriver с заданным в переменную среды path
+* (Опционально) allure-cli
 ```
-Переименуйте файл data.sample.ini в data.ini в директории data
+git clone https://github.com/DKilchik/stockstrader-atf.git
+cd stock_trader
+mv data/data.sample.ini data/data.ini # Переименуйте файл data.sample.ini в data.ini в директории data
 Добавьте валидный username и password в соответствующие поля файла data.ini
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 pytest
+allure serve allure-results # Опционально для просмотра отчета 
 ```
 
 ### Запуск c docker compose
+##### Зависимости:
+* Docker 20.10.13+
 ```
 git clone https://github.com/DKilchik/stockstrader-atf.git
 cd stock_trader
